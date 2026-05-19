@@ -102,15 +102,14 @@ There is **no** `ProtectedRoute` (or equivalent) that checks `isAuthenticated` a
 
 ## Fixes applied (Moves 5–10)
 
-_To be filled after each fix is implemented and verified._
-
-| Move | File(s) | Status |
-|------|---------|--------|
-| 5–6 | `AuthContext.jsx` — full context API + `localStorage` sync | Pending |
-| 7 | `ProtectedRoute.jsx` | Pending |
-| 8 | `App.jsx` — wrap `/dashboard`, `/settings`, `/profile` | Pending |
-| 9 | `Navbar.jsx` — conditional Login / user + Logout | Pending |
-| 10 | `screenshots/` — five flow captures | Pending |
+| Move | File(s) | What changed |
+|------|---------|----------------|
+| 5–6 | `AuthContext.jsx` | `login` / `logout` read & write `authToken` + `authUser`; mount `useEffect` rehydrates session; `isAuthenticated: !!token` |
+| 1 | `main.jsx` | `<AuthProvider>` wraps `<App />` inside `BrowserRouter` |
+| 7 | `ProtectedRoute.jsx` | `useAuth()` → if not authenticated, `<Navigate to="/login" replace />` |
+| 8 | `App.jsx` | `/dashboard`, `/settings`, `/profile` wrapped in `<ProtectedRoute>`; `/` and `/login` stay public |
+| 9 | `Navbar.jsx` | Shows Dashboard/Settings/Profile + user name + Logout when authenticated; Login only when not; logout clears session and navigates to `/login` |
+| 10 | `screenshots/` | Five named PNGs for PR evidence (replace with real browser captures if placeholders) |
 
 ---
 
